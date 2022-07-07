@@ -8,7 +8,7 @@ import yadisk
 
 
 URL = 'https://api.vk.com/method/photos.get'
-TOKEN = ''
+TOKEN = 'da2b2fd9779dae3e30be1602af544051c4a2a8f18fc6f2bcdc647fbff64df5e246d50630bfe0aaf49a966'
 count = 5
 params = {
     'user_ids': '8175842',
@@ -25,15 +25,6 @@ res = requests.get(URL, params=params).json()
 
 item = res['response']['items']
 # pprint(item)
-
-for el in item:
-    photo = {}
-    file_name = el['likes']['count']
-    for picture in el.get('sizes'):
-        if picture.get('type') == 'z':
-            photo_url = picture.get('url')
-            photo[file_name] = photo_url
-    # pprint(photo)
 
 class YaUploader:
     def __init__(self, token: str):
@@ -60,11 +51,30 @@ class YaUploader:
         if response.status_code == 201:
             print("Success")
 
+# def init_logger(name):
+#     logger = logging.getLogger(name)
+#     FORMAT = '%(asctime)s - %(name)s:%(lineno)s - %(levelname)s -  %(message)s'
+#     logger.setLevel(logging.INFO)
+#     fh = logging.FileHandler(filename='course-work/logs')
+#     fh.setFormatter(logging.Formatter(FORMAT))
+#     fh.setLevel(logging.INFO)
+#     logger.addHandler(fh)
+#
+# init_logger('test')
+# logger = logging.getLogger('test.main')
+
 if __name__ == '__main__':
-    token = ''
+    token = 'AQAAAAA1v4gCAADLW7iaegIcy0RSgeQjHhDImZg'
     uploader = YaUploader(token)
-for key, value in photo.items():
-    file_path = f"photo/{key}.png"
-result = uploader.upload_file_to_disk(file_path, value)
+    for el in item:
+        photo = {}
+        file_name = el['likes']['count']
+        for picture in el.get('sizes'):
+            if picture.get('type') == 'z':
+                photo_url = picture.get('url')
+                photo[file_name] = photo_url
+        for key, value in photo.items():
+            file_path = f"photo/{key}"
+            result = uploader.upload_file_to_disk(file_path, value)
 
 

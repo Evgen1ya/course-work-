@@ -1,14 +1,13 @@
 import requests
-import json
 from pprint import pprint
-import os
 import logging
-from datetime import date
-import yadisk
+from logging import StreamHandler
+
+
 
 
 URL = 'https://api.vk.com/method/photos.get'
-TOKEN = 'da2b2fd9779dae3e30be1602af544051c4a2a8f18fc6f2bcdc647fbff64df5e246d50630bfe0aaf49a966'
+TOKEN = ''
 count = 5
 params = {
     'user_ids': '8175842',
@@ -55,16 +54,19 @@ class YaUploader:
 #     logger = logging.getLogger(name)
 #     FORMAT = '%(asctime)s - %(name)s:%(lineno)s - %(levelname)s -  %(message)s'
 #     logger.setLevel(logging.INFO)
-#     fh = logging.FileHandler(filename='course-work/logs')
+#     fh = logging.FileHandler(filename='logs')
 #     fh.setFormatter(logging.Formatter(FORMAT))
 #     fh.setLevel(logging.INFO)
 #     logger.addHandler(fh)
 #
+# logging.basicConfig(filename='logs', filemode='w', format='%(name)s - %(levelname)s - %(message)s')
 # init_logger('test')
 # logger = logging.getLogger('test.main')
+# logger.info('info')
+# logging.debug('This is a debug message')
 
 if __name__ == '__main__':
-    token = 'AQAAAAA1v4gCAADLW7iaegIcy0RSgeQjHhDImZg'
+    token = ''
     uploader = YaUploader(token)
     for el in item:
         photo = {}
@@ -73,8 +75,8 @@ if __name__ == '__main__':
             if picture.get('type') == 'z':
                 photo_url = picture.get('url')
                 photo[file_name] = photo_url
+                # print(photo_url)
         for key, value in photo.items():
             file_path = f"photo/{key}"
             result = uploader.upload_file_to_disk(file_path, value)
-
 

@@ -7,7 +7,7 @@ from logging import StreamHandler
 
 
 URL = 'https://api.vk.com/method/photos.get'
-TOKEN = ''
+TOKEN = 'vk'
 count = 5
 params = {
     'user_ids': '8175842',
@@ -66,7 +66,7 @@ class YaUploader:
 # logging.debug('This is a debug message')
 
 if __name__ == '__main__':
-    token = ''
+    token = 'yd'
     uploader = YaUploader(token)
     for el in item:
         photo = {}
